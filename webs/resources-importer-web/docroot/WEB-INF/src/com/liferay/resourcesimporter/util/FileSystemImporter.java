@@ -398,11 +398,10 @@ public class FileSystemImporter extends BaseImporter {
 
 		setServiceContext(fileName);
 
-		long classNameId = PortalUtil.getClassNameId(JournalArticle.class);
-
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.addStructure(
-			userId, groupId, parentDDMStructureKey, classNameId,
-			ddmStructureKey, nameMap, null, xsd,
+			userId, groupId, parentDDMStructureKey,
+			PortalUtil.getClassNameId(JournalArticle.class), ddmStructureKey,
+			nameMap, null, xsd,
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_STORAGE_TYPE),
 			DDMStructureConstants.TYPE_DEFAULT, serviceContext);
 
@@ -434,13 +433,12 @@ public class FileSystemImporter extends BaseImporter {
 		setServiceContext(fileName);
 
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
-			groupId, ddmStructureKey);
-
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+			groupId, PortalUtil.getClassNameId(JournalArticle.class),
+			ddmStructureKey);
 
 		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.addTemplate(
-			userId, groupId, classNameId, ddmStructure.getStructureId(),
-			ddmTemplateKey, nameMap, null,
+			userId, groupId, PortalUtil.getClassNameId(DDMStructure.class),
+			ddmStructure.getStructureId(), ddmTemplateKey, nameMap, null,
 			DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY,
 			DDMTemplateConstants.TEMPLATE_MODE_CREATE,
 			TemplateConstants.LANG_TYPE_XSD, xsl, false, false, null, null,
